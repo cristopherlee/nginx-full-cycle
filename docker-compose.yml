@@ -19,8 +19,6 @@ services:
       DB_USER: root
       DB_PASSWORD: secret
       DB_NAME: people_db
-    #volumes:
-    #  - ./app:/app
     depends_on:
       - mysql
     entrypoint: ["/bin/sh", "-c", "chmod +x ./wait-for-it.sh && ./wait-for-it.sh mysql:3306 -- node index.js"]
