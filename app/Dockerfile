@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instala todas as dependências
-RUN npm install
+RUN npm ci
 
 # Copia o resto do código fonte
 COPY . .
@@ -16,16 +16,6 @@ COPY . .
 FROM node:18-slim
 
 WORKDIR /app
-
-# Instala o Dockerize
-# ENV DOCKERIZE_VERSION v0.9.3
-
-# RUN apt-get update \
-#     && apt-get install -y wget \
-#     && wget -O - https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz | tar xzf - -C /usr/local/bin \
-#     && apt-get remove -y wget \
-#     && apt-get autoremove -yqq --purge \
-#     && rm -rf /var/lib/apt/lists/*
 
 # Copia apenas o que é necessário da etapa de build
 COPY --from=builder /app ./
